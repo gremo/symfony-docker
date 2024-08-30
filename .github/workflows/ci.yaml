@@ -1,0 +1,47 @@
+name: Continuous Integration
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - '.devcontainer/devcontainer.json'
+            - '.github/workflows/ci.yaml'
+            - 'config/docker/**'
+            - '.distignore'
+            - '.dockerignore'
+            - '.editorconfig'
+            - 'compose.*'
+            - 'Dockerfile'
+        tags:
+            - 'v*.*.*'
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Delete using .distignore
+              run: xargs rm -rf < .distignore
+
+            - name: Create archive
+              run: |
+                  zip -z -r9 symfony-docker.zip . <<END
+                  ${{ github.repository }}
+                  ${{ github.server_url }}/${{ github.repository }}
+
+                  Details:
+                    - Tag: ${{ github.ref_name }}
+                    - SHA: ${{ github.sha }}
+
+                  END
+
+            - name: Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  prerelease: ${{ github.ref_name == 'main' }}
+                  tag_name: ${{ github.ref_name == 'main' && 'latest' || github.ref_name }}
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  files: symfony-docker.zip

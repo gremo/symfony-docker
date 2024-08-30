@@ -1,0 +1,45 @@
+{
+  "name": "${localWorkspaceFolderBasename}",
+  "dockerComposeFile": ["./../compose.yaml", "./../compose.dev.yaml"],
+  "service": "php",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "[php]": {
+          "editor.defaultFormatter": "junstyle.php-cs-fixer"
+        },
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "always"
+        },
+        "editor.formatOnSave": true,
+        "files.exclude": {
+            "node_modules/": true,
+            "public/build/": true,
+            "public/bundles/": true,
+            "var/": true,
+            "vendor/": true
+        },
+        "intelephense.diagnostics.enable": true,
+        "intelephense.environment.phpVersion": "${containerEnv:PHP_VERSION}",
+        "intelephense.format.enable": true,
+        "intelephense.telemetry.enabled": false,
+        "php-cs-fixer.executablePath": "${workspaceFolder}/vendor/bin/php-cs-fixer",
+        "php.suggest.basic": false,
+        "php.validate.enable": false,
+        "phpstan.enabled": true,
+        "phpstan.path": "vendor/bin/phpstan"
+      },
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "donjayamanne.githistory",
+        "editorconfig.editorconfig",
+        "junstyle.php-cs-fixer",
+        "mikestead.dotenv",
+        "recca0120.vscode-phpunit",
+        "remcohaszing.schemastore",
+        "swordev.phpstan"
+      ]
+    }
+  }
+}
