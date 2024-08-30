@@ -1,0 +1,46 @@
+services:
+    php:
+        env_file:
+            - path: .env.prod.local
+              required: false
+        depends_on:
+            db:
+                condition: service_healthy
+        healthcheck:
+            interval: 10s
+            timeout: 5s
+            retries: 3
+            start_period: 10s
+
+    php-worker:
+        env_file:
+            - path: .env.prod.local
+              required: false
+        healthcheck:
+            test: ['CMD', 'supervisorctl', 'status']
+            interval: 5s
+            timeout: 5s
+            retries: 3
+        depends_on:
+            php:
+                condition: service_healthy
+            db:
+                condition: service_healthy
+
+    db:
+        env_file:
+            - path: .env.prod.local
+              required: false
+        healthcheck:
+            test: ['CMD', 'healthcheck.sh', '--connect', '--innodb_initialized']
+            interval: 10s
+            timeout: 5s
+            retries: 3
+            start_period: 10s
+
+    phpmyadmin:
+        environment:
+            HIDE_PHP_VERSION: true
+        depends_on:
+            db:
+                condition: service_healthy

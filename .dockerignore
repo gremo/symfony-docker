@@ -1,0 +1,15 @@
+.devcontainer/
+.github/
+tests/
+var/
+vendor/
+.dockerignore
+.editorconfig
+.env.*.local
+.env.local
+.env.local.php
+.env.test
+compose.*.yaml
+compose.yaml
+Dockerfile
+README.md
