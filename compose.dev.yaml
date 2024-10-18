@@ -12,7 +12,7 @@ services:
             - .:/app
         environment:
             CADDY_GLOBAL_OPTIONS: debug
-            SERVER_NAME: ${SERVER_NAME:-localhost}
+            SERVER_NAME: ${SERVER_NAME:-localhost}, php:80
             DATABASE_URL: mysql://${MARIADB_USER:-app}:${MARIADB_PASSWORD:-!ChangeMe!}@db:3306/${MARIADB_DATABASE:-app}?charset=${MARIADB_CHARSET:-utf8}
             MAILER_DSN: ${MAILER_DSN:-smtp://mailpit:1025}
 
