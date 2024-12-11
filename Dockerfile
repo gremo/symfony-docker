@@ -12,9 +12,7 @@ RUN \
     # Install OS packages
     apt-get update; \
     apt-get -y --no-install-recommends install \
-        git \
         libnss3-tools \
-        openssh-client \
         supervisor \
         unzip \
     ; \
@@ -60,10 +58,20 @@ FROM frankenphp_base AS frankenphp_dev
 SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
 RUN \
+    # Install OS packages
+    apt-get update; \
+    apt-get -y --no-install-recommends install \
+        git \
+        openssh-client \
+    ; \
+    # Configure PHP
     cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"; \
     { \
         echo xdebug.client_host = host.docker.internal; \
-    } >> "$PHP_INI_DIR/conf.d/10-php.ini"
+    } >> "$PHP_INI_DIR/conf.d/10-php.ini"; \
+    # Cleanup
+    apt-get clean; \
+    rm -rf /var/lib/apt/lists/*
 
 # Franken prod stage
 ###############################################################################
@@ -75,6 +83,7 @@ ENV APP_RUNTIME=Runtime\\FrankenPhpSymfony\\Runtime
 ENV FRANKENPHP_CONFIG="worker ./public/index.php"
 
 RUN \
+    # Configure PHP
     cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"; \
     { \
         echo expose_php = 0; \
