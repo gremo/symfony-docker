@@ -23,18 +23,21 @@
                     "var/": true,
                     "vendor/": true
                 },
-                "intelephense.diagnostics.enable": true,
-                "intelephense.environment.phpVersion": "${containerEnv:PHP_VERSION}",
-                "intelephense.format.enable": true,
-                "intelephense.telemetry.enabled": false,
                 "php-cs-fixer.executablePath": "${workspaceFolder}/vendor/bin/php-cs-fixer",
+                "php.completion.autoimport-docblock": "fqn",
+                "php.completion.docblock": false,
+                "php.format.codeStyle": "Off",
+                "php.inlayHints.parameters.enabled": false,
+                "php.inlayHints.types.return": false,
                 "php.suggest.basic": false,
                 "php.validate.enable": false,
+                "php.version": "${containerEnv:PHP_VERSION}",
                 "phpstan.enabled": true,
-                "phpstan.path": "vendor/bin/phpstan"
+                "phpstan.path": "vendor/bin/phpstan",
+                "phpTools.suppressPremiumFeatures": true
             },
             "extensions": [
-                "bmewburn.vscode-intelephense-client",
+                "DEVSENSE.phptools-vscode",
                 "donjayamanne.githistory",
                 "editorconfig.editorconfig",
                 "junstyle.php-cs-fixer",
