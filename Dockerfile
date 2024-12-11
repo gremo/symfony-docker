@@ -62,6 +62,7 @@ RUN \
     apt-get update; \
     apt-get -y --no-install-recommends install \
         git \
+        gnupg2 \
         openssh-client \
     ; \
     # Configure PHP
