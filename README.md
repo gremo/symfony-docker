@@ -1,11 +1,11 @@
 # Symfony Docker
 
-A simple archive that provides a development and production container for Symfony applications based on Docker. Uses FrankenPHP, MariaDB, phpMyAdmin and Mailpit.
+A simple archive that provides a development and production container for Symfony applications based on Docker. Uses FrankenPHP, MariaDB, phpMyAdmin and Mailpit. Node.js is also supported and a basic Visual Studio Code customization is included.
 
 ## 🚀 Quick start
 
 1. Download the [**latest release**](https://github.com/gremo/symfony-docker/releases/download/latest/symfony-docker.zip) and unzip the archive.
-2. Open Visual Studio Code and reopen the project in the **Dev Container**.
+2. Open Visual Studio Code and **reopen the project in the Dev Container**.
 3. Download the **Symfony Skeleton**:
     ```bash
     curl -O https://raw.githubusercontent.com/symfony/skeleton/refs/heads/7.1/composer.json
@@ -24,6 +24,8 @@ A simple archive that provides a development and production container for Symfon
 
 ## ⚙️ Configuration
 
+Various versions can be set changing the `compose.yaml` file:
+
 ```yaml
 # compose.yaml
 services:
@@ -31,14 +33,27 @@ services:
         build:
             args:
                 # Set the FrankenPHP version (default latest).
-                FRANKENPHP_TAG: php8
-                # Install Node.js with npm and Yarn (default empty).
-                NODE_VERSION: current
+                # Supports any FrankenPHP Docker tag.
+                FRANKENPHP_TAG: php8.3
+                # Set the Node.js version (default empty, meaning not installed).
+                # Supports a major version or keywords "current" and "lts".
+                NODE_VERSION: lts
 
-        db:
-            # Set the MariaDB version (default latest)
-            image: mariadb:latest
+    db:
+        # Set the MariaDB version (default latest).
+        # Supports any MariaDB Docker tag.
+        image: mariadb:11
+
+    phpmyadmin:
+        # Set the phpMyAdmin version (default latest).
+        # Supports any phpMyAdmin Docker tag.
+        image: phpmyadmin:5
 ```
+
+Other configuration files:
+
+- `config/docker/php*.ini` for PHP
+- `config/docker/supervisor.conf` for [Supervisor](http://supervisord.org/)
 
 ## 📡 Endpoints
 
