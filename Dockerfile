@@ -12,7 +12,6 @@ RUN \
     # Install OS packages
     apt-get update; \
     apt-get -y --no-install-recommends install \
-        acl \
         git \
         libnss3-tools \
         openssh-client \
