@@ -14,7 +14,11 @@ A simple archive that provides a development and production container for Symfon
     ```bash
     composer require --dev --no-update friendsofphp/php-cs-fixer phpstan/phpstan
     ```
-5. Install **Symfony**:
+5. If you plan to use **Docker in production**, add FrankenPHP runtime:
+    ```bash
+    composer require --no-update runtime/frankenphp-symfony
+    ```
+6. Install **Symfony**:
     ```bash
     composer install
     ```
