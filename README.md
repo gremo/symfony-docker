@@ -60,7 +60,7 @@ Other configuration files:
 > [!NOTE]
 > In development, the database `app` is created and accessible by the user `app` with the password `!ChangeMe!` (same password for `root`). In production, you are forced to set the `DATABASE_URL` AND `MARIADB_*` variables in the `.env.prod.local` file.
 
-| URL                                            | Servizio    |
+| URL                                            | Service     |
 |------------------------------------------------|-------------|
 | [https://localhost](https://localhost)         | App         |
 | [http://localhost:8080](http://localhost:8080) | phpMyAdmin  |
