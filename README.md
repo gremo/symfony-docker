@@ -2,7 +2,7 @@
 
 A simple archive that provides a development and production container for Symfony applications based on Docker. Uses FrankenPHP, MariaDB, phpMyAdmin and Mailpit. Node.js is also supported and a basic Visual Studio Code customization is included.
 
-## 🚀 Quick start
+## ✨ Quick start
 
 1. Download the [**latest release**](https://github.com/gremo/symfony-docker/releases/download/latest/symfony-docker.zip) and unzip the archive.
 2. Open Visual Studio Code and **reopen the project in the Dev Container**.
@@ -24,7 +24,10 @@ A simple archive that provides a development and production container for Symfon
 
 ## ⚙️ Configuration
 
-Various versions can be set changing the `compose.yaml` file:
+> [!NOTE]
+> Composer version cannot be changed at the moment and is locked to the latest version.
+
+Various versions can be set by changing the `compose.yaml` file:
 
 ```yaml
 # compose.yaml
@@ -55,21 +58,21 @@ Other configuration files:
 - `config/docker/php*.ini` for PHP
 - `config/docker/supervisor.conf` for [Supervisor](http://supervisord.org/)
 
-## 📡 Endpoints
+## 🧑‍💻 Development tips
 
 > [!NOTE]
-> In development, the database `app` is created and accessible by the user `app` with the password `!ChangeMe!` (same password for `root`). In production, you are forced to set the `DATABASE_URL` AND `MARIADB_*` variables in the `.env.prod.local` file.
+> The `app` database is automatically created and can be accessed by the `app` user using the password `!ChangeMe!`. The same password is also assigned to the `root` user.
+
+Available endpoints are:
 
 | URL                                            | Service     |
 |------------------------------------------------|-------------|
 | [https://localhost](https://localhost)         | App         |
+| localhost:3306                                 | MariaDB     |
 | [http://localhost:8080](http://localhost:8080) | phpMyAdmin  |
 | [http://localhost:8025](http://localhost:8025) | Mailpit     |
-| localhost:3306                                 | MariaDB     |
 
-## 🛠️ VSCode extensions
-
-Visual Studio Code installed by default:
+Visual Studio Code extensions installed and configured by default:
 
 - [PHP](https://marketplace.visualstudio.com/items?itemName=DEVSENSE.phptools-vscode)
 - [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)
@@ -80,9 +83,35 @@ Visual Studio Code installed by default:
 - [JSON Schema Store Catalog](https://marketplace.visualstudio.com/items?itemName=remcohaszing.schemastore)
 - [PHPStan](https://marketplace.visualstudio.com/items?itemName=swordev.phpstan)
 
+## 🚀 Production tips
+
+Create the `.env.prod.local` file to set up the environment for all containers:
+
+> [!IMPORTANT]
+> In production, all environment files are ignored except for `.env.prod.local`. The `.env` file will only be used to generate the `.env.local.php` file.
+
+```env
+# The domain name, HTTPS certificate is installed automatically
+SERVER_NAME="example.com"
+
+# The timezone used by all containers
+TZ="Europe/Rome"
+
+# Symfony container variables
+DATABASE_URL="mysql://$MARIADB_USER:$MARIADB_PASSWORD@db:3306/$MARIADB_DATABASE?charset=utf8"
+
+# MariaDB container variables
+MARIADB_DATABASE="app"
+MARIADB_USER="app"
+MARIADB_PASSWORD="MySecretPassword"
+MARIADB_ROOT_PASSWORD="MySecretRootPassword"
+```
+
+To run the project in production, execute `docker compose up -d`. FrankenPHP worker mode is enabled by default.
+
 ## ❤️ Contributing
 
-All types of contributions are encouraged and valued. See the [contributing](.github/CONTRIBUTING.md) guidelines, the community looks forward to your contributions!
+All kinds of contributions are welcome and appreciated. See the [contributing](.github/CONTRIBUTING.md) guidelines, the community looks forward to your contributions!
 
 ## 📘 License
 
