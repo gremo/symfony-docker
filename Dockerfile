@@ -22,7 +22,7 @@ RUN \
     # Configure OS
     sed -i '/\[supervisord\]/a user=root' /etc/supervisor/supervisord.conf; \
     sed -i '/\[supervisord\]/a nodaemon=true' /etc/supervisor/supervisord.conf; \
-    sed -i '/^exec "\$@"/i [ "$1" = "frankenphp" ] && [ "$APP_ENV" = "prod" ] && php bin/console doctrine:migrations:migrate --allow-no-migration --no-interaction --no-ansi\n' /usr/local/bin/docker-php-entrypoint; \
+    sed -i '/^exec "\$@"/i if [ "$1" = "frankenphp" ] && [ "$APP_ENV" = "prod" ] && php bin/console --raw | grep -q "^doctrine:migrations:migrate"; then\n	php bin/console doctrine:migrations:migrate --allow-no-migration --no-interaction --no-ansi\nfi\n' /usr/local/bin/docker-php-entrypoint; \
     # Install PHP extensions
     install-php-extensions \
         @composer \
