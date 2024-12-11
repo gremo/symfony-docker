@@ -52,6 +52,19 @@ services:
 | [http://localhost:8025](http://localhost:8025) | Mailpit     |
 | localhost:3306                                 | MariaDB     |
 
+## 🛠️ VSCode extensions
+
+Visual Studio Code installed by default:
+
+- [PHP](https://marketplace.visualstudio.com/items?itemName=DEVSENSE.phptools-vscode)
+- [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)
+- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [PHP CS Fixer](https://marketplace.visualstudio.com/items?itemName=junstyle.php-cs-fixer)
+- [DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)
+- [PHPUnit Test Explorer](https://marketplace.visualstudio.com/items?itemName=recca0120.vscode-phpunit)
+- [JSON Schema Store Catalog](https://marketplace.visualstudio.com/items?itemName=remcohaszing.schemastore)
+- [PHPStan](https://marketplace.visualstudio.com/items?itemName=swordev.phpstan)
+
 ## ❤️ Contributing
 
 All types of contributions are encouraged and valued. See the [contributing](.github/CONTRIBUTING.md) guidelines, the community looks forward to your contributions!
