@@ -111,7 +111,7 @@ MARIADB_PASSWORD="MySecretPassword"
 MARIADB_ROOT_PASSWORD="MySecretRootPassword"
 ```
 
-To run the project in production, execute `docker compose up -d`. FrankenPHP worker mode is enabled by default.
+To run the project in production, execute `docker compose up -d`. FrankenPHP worker mode is enabled by default. Doctrine migrations are automatically executed if available.
 
 ## ❤️ Contributing
 
