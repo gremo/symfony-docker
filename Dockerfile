@@ -106,7 +106,6 @@ RUN \
         else \
             npm install --no-progress; \
         fi; \
-
         npm run build; \
     fi; \
     sync
